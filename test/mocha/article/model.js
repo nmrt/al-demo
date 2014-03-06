@@ -14,10 +14,6 @@ var article;
 
 //The tests
 describe('<Unit Test>', function() {
-    it('should fail', function() {
-        true.should.be.exactly(false);
-    });
-
     describe('Model Article:', function() {
         beforeEach(function(done) {
             user = new User({
