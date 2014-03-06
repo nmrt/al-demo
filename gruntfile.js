@@ -84,7 +84,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-env');
 
     //Making grunt default to force in order not to break the project.
-    grunt.option('force', true);
+    //grunt.option('force', true);
 
     //Default task(s).
     grunt.registerTask('default', ['jshint', 'concurrent']);
