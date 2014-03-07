@@ -49,8 +49,11 @@ module.exports = function(grunt) {
                 }
             }
         },
+        'node-inspector': {
+            dev: {}
+        },
         concurrent: {
-            tasks: ['nodemon', 'watch'],
+            tasks: ['nodemon', 'node-inspector', 'watch'],
             options: {
                 logConcurrentOutput: true
             }
@@ -88,6 +91,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-nodemon');
+    grunt.loadNpmTasks('grunt-node-inspector');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-env');
 
@@ -95,9 +99,11 @@ module.exports = function(grunt) {
     //grunt.option('force', true);
 
     //Default task(s).
-    grunt.registerTask('default', ['jshint', 'watch']); // concurrent
+    grunt.registerTask('default', ['jshint', 'concurrent']);
 
     //Test task.
-    grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
-    grunt.registerTask('test:debug', ['env:test', 'mochaTest', 'karma:debug']);
+    grunt.registerTask('test', ['test:backend', 'test:frontend']);
+    grunt.registerTask('test:backend', ['env:test', 'mochaTest']);
+    grunt.registerTask('test:frontend', ['env:test', 'karma:unit']);
+    grunt.registerTask('test:frontend:debug', ['env:test', 'karma:debug']);
 };
