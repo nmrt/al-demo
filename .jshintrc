@@ -36,5 +36,6 @@
     ],
     "indent": 4, // Specify indentation spacing
     "devel": true, // Allow development statements e.g. `console.log();`.
+    "debug": true, // This option suppresses warnings about the debugger statements
     "noempty": true // Prohibit use of empty blocks.
 }

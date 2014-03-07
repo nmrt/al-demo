@@ -70,6 +70,14 @@ module.exports = function(grunt) {
         karma: {
             unit: {
                 configFile: 'test/karma/karma.conf.js'
+            },
+
+            debug: {
+                configFile: 'test/karma/karma.conf.js',
+                options: {
+                    browsers: ['Chrome'],
+                    singleRun: false
+                }
             }
         }
     });
@@ -87,8 +95,9 @@ module.exports = function(grunt) {
     //grunt.option('force', true);
 
     //Default task(s).
-    grunt.registerTask('default', ['jshint', 'concurrent']);
+    grunt.registerTask('default', ['jshint', 'watch']); // concurrent
 
     //Test task.
     grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+    grunt.registerTask('test:debug', ['env:test', 'mochaTest', 'karma:debug']);
 };
