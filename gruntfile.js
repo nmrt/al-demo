@@ -38,7 +38,7 @@ module.exports = function(grunt) {
                 script: 'server.js',
                 options: {
                     args: [],
-                    ignore: ['public/**'],
+                    ignore: ['public/**', 'test/coverage/**'],
                     ext: 'js',
                     nodeArgs: ['--debug'],
                     delayTime: 1,
