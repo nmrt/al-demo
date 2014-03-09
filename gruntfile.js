@@ -6,7 +6,15 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         watch: {
             js: {
-                files: ['gruntfile.js', 'server.js', 'app/**/*.js', 'public/js/**', 'test/**/*.js', '!test/coverage/**/*.js'],
+                files: [
+                    'gruntfile.js',
+                    'server.js',
+                    'app/**/*.js',
+                    'config/**/*.js',
+                    'public/js/**',
+                    'test/**/*.js',
+                    '!test/coverage/**/*.js'
+                ],
                 tasks: ['jshint', 'test'],
                 options: {
                     livereload: true,
@@ -72,11 +80,11 @@ module.exports = function(grunt) {
         },
         karma: {
             unit: {
-                configFile: 'test/karma/karma.conf.js'
+                configFile: 'config/karma.js'
             },
 
             debug: {
-                configFile: 'test/karma/karma.conf.js',
+                configFile: 'config/karma.js',
                 options: {
                     browsers: ['Chrome'],
                     singleRun: false
