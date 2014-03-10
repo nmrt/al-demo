@@ -1,6 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var fixtureLoader = require('pow-mongoose-fixtures');
+var fixtures = require('./fixtures.js');
 var Flight = mongoose.model('Flight');
 var City = mongoose.model('City');
 
@@ -9,20 +11,15 @@ describe('Flight model', function() {
     var fakeCity;
 
     beforeEach(function(done) {
-        var cities = [
-            {code: 'FOO', name: 'Foobar'},
-            {code: 'BAR', name: 'Barbaz'}
-        ];
-
         fakeCity = {foo: 'bar'};
 
-        City.create(cities, function(error, from, to) {
-            flight = new Flight({
-                from: from,
-                to: to
-            });
+        fixtureLoader.load(fixtures, mongoose.connection, function() {
+            var id = fixtures.Flight.foobar._id;
+            Flight.findById(id).exec(function(error, foobar) {
+                flight = foobar;
 
-            done();
+                done();
+            });
         });
     });
 

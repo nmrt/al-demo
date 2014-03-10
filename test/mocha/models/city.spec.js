@@ -2,15 +2,22 @@
 
 var should = require('should');
 var mongoose = require('mongoose');
+var fixtureLoader = require('pow-mongoose-fixtures');
+var fixtures = require('./fixtures.js');
 var City = mongoose.model('City');
 
 describe('City model', function() {
     var city;
 
     beforeEach(function(done) {
-        city = new City({code: 'FOO', name: 'Foobar'});
+        fixtureLoader.load(fixtures, mongoose.connection, function() {
+            var id = fixtures.City.foo._id;
+            City.findById(id).exec(function(error, foo) {
+                city = foo;
 
-        done();
+                done();
+            });
+        });
     });
 
     describe('Code', function() {
