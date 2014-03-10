@@ -86,4 +86,13 @@ describe('Flight model', function() {
             });
         });
     });
+
+    it('should be able to fully populate itself', function(done) {
+        flight.fullyPopulate(function() {
+            flight.from.should.be.an.instanceOf(City);
+            flight.to.should.be.an.instanceOf(City);
+
+            done();
+        });
+    });
 });

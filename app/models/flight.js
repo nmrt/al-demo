@@ -9,4 +9,8 @@ var flightSchema = new mongoose.Schema({
     schedule: [{date: Date, price: Number}]
 });
 
+flightSchema.method('fullyPopulate', function(callback) {
+    this.populate('from to', callback);
+});
+
 mongoose.model('Flight', flightSchema);
