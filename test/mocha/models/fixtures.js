@@ -16,3 +16,14 @@ exports.Flight = {
         _id: new ObjectId()
     }
 };
+
+exports.Order = {
+    foobar: {
+        items: [{
+            flight: exports.Flight.foobar._id,
+            date: new Date('March 11, 2014'),
+            count: 1
+        }],
+        _id: new ObjectId()
+    }
+};
