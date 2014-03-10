@@ -1,62 +1,54 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
-var should = require('should'),
-    mongoose = require('mongoose'),
-    User = mongoose.model('User');
+var mongoose = require('mongoose');
+var fixtureLoader = require('pow-mongoose-fixtures');
+var fixtures = require('./fixtures.js');
+var User = mongoose.model('User');
+var Order = mongoose.model('Order');
 
-//Globals
-var user, user2;
+describe('User model', function() {
+    var user1;
+    var user2;
 
-//The tests
-describe('<Unit Test>', function() {
-    describe('Model User:', function() {
-        before(function(done) {
-            user = new User({
-                name: 'Full name',
-                email: 'test@test.com',
-                username: 'user',
-                password: 'password',
-                provider: 'local'
+    beforeEach(function(done) {
+        fixtureLoader.load(fixtures, mongoose.connection, function() {
+            User.findById(fixtures.User.u1._id).exec(function(error, u1) {
+                user1 = u1;
+
+                User.findById(fixtures.User.u2._id).exec(function(error, u2) {
+                    user2 = u2;
+
+                    done();
+                });
             });
-            user2 = new User(user);
+        });
+    });
+
+    it('should be able to hold the collection of orders', function(done) {
+        User.populate(user1, {path: 'orders'}, function() {
+            user1.orders[0].should.be.instanceOf(Order);
 
             done();
         });
+    });
 
-        describe('Method Save', function() {
-            it('should begin with no users', function(done) {
-                User.find({}, function(err, users) {
-                    users.should.have.length(0);
-                    done();
-                });
-            });
+    it('should guarantee username uniqueness', function(done) {
+        user2.username = user1.username;
 
-            it('should be able to save whithout problems', function(done) {
-                user.save(done);
-            });
+        user2.save(function(error) {
+            error.toString().should.match(/\bduplicate\b/);
 
-            it('should fail to save an existing user again', function(done) {
-                user.save();
-                return user2.save(function(err) {
-                    should.exist(err);
-                    done();
-                });
-            });
-
-            it('should show an error when try to save without name', function(done) {
-                user.name = '';
-                return user.save(function(err) {
-                    should.exist(err);
-                    done();
-                });
-            });
+            done();
         });
+    });
 
-        after(function(done) {
-            User.remove().exec();
+    it('should validate the name', function(done) {
+        user1.name = '';
+
+        user1.validate(function(error) {
+            error.name.should.equal('ValidationError');
+            error.errors.name.type.should.equal('required');
+
             done();
         });
     });

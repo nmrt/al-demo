@@ -27,7 +27,8 @@ var UserSchema = new Schema({
     twitter: {},
     github: {},
     google: {},
-    linkedin: {}
+    linkedin: {},
+    orders: [{ref: 'Order', type: mongoose.Schema.ObjectId}]
 });
 
 /**

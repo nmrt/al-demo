@@ -27,3 +27,24 @@ exports.Order = {
         _id: new ObjectId()
     }
 };
+
+exports.User = {
+    u1: {
+        name: 'Full name',
+        email: 'test@test.com',
+        username: 'user',
+        password: 'password',
+        provider: 'local',
+        orders: [exports.Order.foobar._id],
+        _id: new ObjectId()
+    },
+
+    u2: {
+        name: 'Full name 2',
+        email: 'test2@test.com',
+        username: 'user2',
+        password: 'password2',
+        provider: 'local',
+        _id: new ObjectId()
+    }
+};
