@@ -1,5 +1,6 @@
 'use strict';
 
+var should = require('should');
 var mongoose = require('mongoose');
 var fixtureLoader = require('pow-mongoose-fixtures');
 var fixtures = require('./fixtures.js');
@@ -88,7 +89,22 @@ describe('Flight model', function() {
     });
 
     it('should be able to fully populate itself', function(done) {
-        flight.fullyPopulate(function() {
+        flight.fullyPopulate(function(error, f) {
+            should.not.exist(error);
+            f.should.be.exactly(flight);
+
+            flight.from.should.be.an.instanceOf(City);
+            flight.to.should.be.an.instanceOf(City);
+
+            done();
+        });
+    });
+
+    it('should be able to fully populate itself statically', function(done) {
+        Flight.fullyPopulate([flight], function(error, flights) {
+            should.not.exist(error);
+            flights.should.eql([flight]);
+
             flight.from.should.be.an.instanceOf(City);
             flight.to.should.be.an.instanceOf(City);
 
