@@ -1,5 +1,6 @@
 'use strict';
 
+var sinon = require('sinon');
 var should = require('should');
 var mongoose = require('mongoose');
 var fixtureLoader = require('pow-mongoose-fixtures');
@@ -39,6 +40,26 @@ describe('Order model', function() {
         order.validate(function(error) {
             should.not.exist(error);
             orderItem.count.should.be.exactly(1);
+
+            done();
+        });
+    });
+
+    it('should be able to fully populate itself', function(done) {
+        sinon.stub(Flight, 'fullyPopulate', function(docs, cb) { cb(); });
+
+        order.fullyPopulate(function(error, o) {
+            should.not.exist(error);
+            o.should.be.exactly(order);
+
+            orderItem.flight.should.be.an.instanceOf(Flight);
+
+            sinon.assert.calledOnce(Flight.fullyPopulate);
+            sinon.assert.calledWith(
+                Flight.fullyPopulate,
+                [orderItem.flight],
+                sinon.match.func
+            );
 
             done();
         });
