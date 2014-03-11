@@ -1,6 +1,6 @@
 'use strict';
 
-// User routes use users controller
+var authorization = require('./middlewares/authorization');
 var users = require('../controllers/users');
 
 module.exports = function(app, passport) {
@@ -15,6 +15,9 @@ module.exports = function(app, passport) {
 
     // Setting up the userId param
     app.param('userId', users.user);
+
+    app.all('/users/:userId/*', authorization.requiresLogin);
+    app.get('/users/:userId/orders', users.orders);
 
     // Setting the local strategy route
     app.post('/users/session', passport.authenticate('local', {
