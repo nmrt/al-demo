@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Order = mongoose.model('Order');
 
 /**
  * Auth callback
@@ -104,6 +105,8 @@ exports.user = function(req, res, next, id) {
 
 exports.orders = function(request, response) {
     request.profile.populate('orders', function(error, user) {
-        response.json(user.orders);
+        Order.fullyPopulate(user.orders, function(error, orders) {
+            response.json(orders);
+        });
     });
 };

@@ -12,13 +12,26 @@ var orderSchema = new mongoose.Schema({
     }]
 });
 
-orderSchema.method('fullyPopulate', function(callback) {
-    this.populate('items.flight', function(error, order) {
-        var flights = _.map(order.items, function(x) { return x.flight; });
+orderSchema.static('fullyPopulate', function(orders, callback) {
+    var klass = mongoose.model('Order');
+    klass.populate(orders, {path: 'items.flight'}, function(error, orders) {
+        var flights = _.map(orders, function(order) {
+            return _.map(order.items, function(item) {
+                return item.flight;
+            });
+        });
+
+        flights = _.uniq(_.flatten(flights));
 
         Flight.fullyPopulate(flights, function() {
-            callback(error, order);
+            callback(error, orders);
         });
+    });
+});
+
+orderSchema.method('fullyPopulate', function(callback) {
+    mongoose.model('Order').fullyPopulate([this], function(error, orders) {
+        callback(error, orders[0]);
     });
 });
 
