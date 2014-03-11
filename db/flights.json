@@ -1,0 +1,1 @@
+{ "from" : { "$oid" : "531dd3a0566301b62d1a8c49" }, "to" : { "$oid" : "531dd3a0566301b62d1a8c4a" }, "price" : 100, "_id" : { "$oid" : "531dd3a0566301b62d1a8c4b" }, "schedule" : [ { "date" : { "$date" : 1394488800000 }, "price" : 95, "_id" : { "$oid" : "531dd3a2566301b62d1a8c6d" } } ], "__v" : 0 }

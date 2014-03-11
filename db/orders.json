@@ -1,0 +1,1 @@
+{ "_id" : { "$oid" : "531dd3a0566301b62d1a8c4c" }, "items" : [ { "flight" : { "$oid" : "531dd3a0566301b62d1a8c4b" }, "date" : { "$date" : 1394488800000 }, "_id" : { "$oid" : "531dd3a2566301b62d1a8c6e" }, "count" : 1 } ], "__v" : 0 }
