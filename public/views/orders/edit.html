@@ -1,0 +1,71 @@
+<section class="order" ng-controller="OrdersCtrl" ng-init="findOne()">
+    <form ng-submit="save()" class="form-horizontal">
+        <ul>
+            <li ng-repeat="item in order.items">
+                <h3>Item #{{$index + 1}}</h3>
+
+                <div class="form-group">
+                    <label>
+                        From <input
+                            ng-model="item.flight.from"
+                            typeahead="c as c.name for c in getCities($viewValue)"
+                            typeahead-on-select="getFlights({from: item.flight.from._id})"
+                            typeahead-editable="false"
+                            class="form-control"
+                        >
+                    </label>
+
+                    <label>
+                        To <input
+                            ng-model="item.flight.to"
+                            typeahead="c as c.name for c in getCities($viewValue)"
+                            typeahead-on-select="getFlights({to: item.flight.to._id})"
+                            typeahead-editable="false"
+                            class="form-control"
+                        >
+                    </label>
+                </div>
+
+                <ul class="flights">
+                    <li ng-repeat="flight in flights">
+                        <div>From {{flight.from.name}} to {{flight.to.name}}</div>
+                        <div>${{flight.price}}</div>
+                        <button
+                            ng-click="setItemFlight(item, flight)"
+                            type="button"
+                            class="btn"
+                        >Select</button>
+                    </li>
+                </ul>
+
+                <div class="form-group">
+                    <label>
+                        Date <input class="form-control" ng-model="item.date" required>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Count <input class="form-control" ng-model="item.count">
+                    </label>
+                </div>
+
+                <button
+                    ng-click="removeItem(item)"
+                    type="button"
+                    class="btn remove-item-button"
+                >Remove item</button>
+            </li>
+        </ul>
+
+        <button
+            ng-click="addItem()"
+            type="button"
+            class="btn add-item-button"
+        >Add item</button>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </form>
+</section>

@@ -8,6 +8,21 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
 
     // states for my app
     $stateProvider.state('home', {url: '/', templateUrl: 'views/index.html'});
+
+    $stateProvider.state('orders/list', {
+        url: '/orders/list',
+        templateUrl: 'views/orders/list.html'
+    });
+
+    $stateProvider.state('orders/create', {
+        url: '/orders/create',
+        templateUrl: 'views/orders/create.html'
+    });
+
+    $stateProvider.state('orders/edit', {
+        url: '/orders/:order/edit',
+        templateUrl: 'views/orders/edit.html'
+    });
 }
 ]);
 

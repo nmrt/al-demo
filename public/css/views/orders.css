@@ -1,0 +1,15 @@
+.order li,
+.orders li {
+    list-style: none;
+}
+
+.order .add-item-button,
+.order .remove-item-button,
+.orders button {
+    float: right;
+}
+
+.flights div {
+    float: left;
+    margin-right: 1em;
+}

@@ -1,0 +1,30 @@
+<section ng-controller="OrdersCtrl" ng-init="list()">
+    <ul class="orders">
+        <li ng-repeat="order in orders">
+            <h4>Order #{{$index + 1}}</h4>
+
+            <button
+                ng-click="remove(order)"
+                type="button"
+                class="btn"
+            >Remove</button>
+
+            <button
+                ui-sref="orders/edit({order: order._id})"
+                type="button"
+                class="btn"
+            >Edit</button>
+
+            <ul>
+                <li ng-repeat="item in order.items">
+                    <h3>
+                        From {{item.flight.from.name}}
+                        to {{item.flight.to.name}}
+                        &times; {{item.count}}
+                    </h3>
+                    {{item.date | date}}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</section>
