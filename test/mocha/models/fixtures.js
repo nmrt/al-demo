@@ -14,16 +14,32 @@ exports.Flight = {
         price: 100,
         schedule: [{date: new Date('March 11, 2014'), price: 95}],
         _id: new ObjectId()
+    },
+
+    barfoo: {
+        from: exports.City.bar._id,
+        to: exports.City.foo._id,
+        price: 100,
+        schedule: [{date: new Date('March 11, 2014'), price: 95}],
+        _id: new ObjectId()
     }
 };
 
 exports.Order = {
     foobar: {
-        items: [{
-            flight: exports.Flight.foobar._id,
-            date: new Date('March 11, 2014'),
-            count: 1
-        }],
+        items: [
+            {
+                flight: exports.Flight.foobar._id,
+                date: new Date('March 11, 2014'),
+                count: 1
+            },
+
+            {
+                flight: exports.Flight.barfoo._id,
+                date: new Date('March 12, 2014'),
+                count: 1
+            }
+        ],
         _id: new ObjectId()
     }
 };

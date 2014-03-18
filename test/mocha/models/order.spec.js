@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var sinon = require('sinon');
 var should = require('should');
 var mongoose = require('mongoose');
@@ -57,7 +58,7 @@ describe('Order model', function() {
             sinon.assert.calledOnce(Flight.fullyPopulate);
             sinon.assert.calledWith(
                 Flight.fullyPopulate,
-                [orderItem.flight],
+                _.map(order.items, 'flight'),
                 sinon.match.func
             );
 
