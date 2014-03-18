@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                     'test/**/*.js',
                     '!test/coverage/**/*.js'
                 ],
-                tasks: ['jshint', 'test'],
+                tasks: ['jshint'], // test
                 options: {
                     livereload: true,
                 },
