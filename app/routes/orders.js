@@ -15,4 +15,6 @@ module.exports = function(app) {
 
     app.get('/orders/:order', ordersCtrl.show);
     app.post('/orders', ordersCtrl.create);
+    app.post('/orders/:order', ordersCtrl.update);
+    app.del('/orders/:order', ordersCtrl.remove);
 };
