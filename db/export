@@ -2,7 +2,7 @@
 
 dir=`dirname $0`
 
-mongoexport -d mean-test -c cities > $dir/cities.json
-mongoexport -d mean-test -c flights > $dir/flights.json
-mongoexport -d mean-test -c orders > $dir/orders.json
-mongoexport -d mean-test -c users > $dir/users.json
+mongoexport -d al-demo-test -c cities > $dir/cities.json
+mongoexport -d al-demo-test -c flights > $dir/flights.json
+mongoexport -d al-demo-test -c orders > $dir/orders.json
+mongoexport -d al-demo-test -c users > $dir/users.json

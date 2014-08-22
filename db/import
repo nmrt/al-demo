@@ -2,7 +2,7 @@
 
 dir=`dirname $0`
 
-mongoimport -d mean-dev -c cities --drop < $dir/cities.json
-mongoimport -d mean-dev -c flights --drop < $dir/flights.json
-mongoimport -d mean-dev -c orders --drop < $dir/orders.json
-mongoimport -d mean-dev -c users --drop < $dir/users.json
+mongoimport -d al-demo-dev -c cities --drop < $dir/cities.json
+mongoimport -d al-demo-dev -c flights --drop < $dir/flights.json
+mongoimport -d al-demo-dev -c orders --drop < $dir/orders.json
+mongoimport -d al-demo-dev -c users --drop < $dir/users.json
