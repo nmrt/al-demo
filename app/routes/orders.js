@@ -11,7 +11,7 @@ module.exports = function(app) {
 
     app.param('order', Order);
 
-    app.all('/orders/*', authorization.requiresLogin);
+    app.all('/orders*', authorization.requiresLogin);
 
     app.get('/orders/:order', ordersCtrl.show);
     app.post('/orders', ordersCtrl.create);
