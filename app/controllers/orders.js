@@ -15,13 +15,13 @@ exports.create = function(request, response) {
 
     order.save(function(error, order) {
         if (error)
-            throw error;
+            return console.error(error);
 
         // Pushing to `user.orders' as it's one-way association.
         request.user.orders.push(order);
         request.user.save(function(error) {
             if (error)
-                throw error;
+                return console.error(error);
 
             response.json(order);
         });
@@ -33,7 +33,7 @@ exports.update = function(request, response) {
 
     order.save(function(error, order) {
         if (error)
-            throw error;
+            return console.error(error);
 
         response.json(order);
     });
@@ -42,7 +42,7 @@ exports.update = function(request, response) {
 exports.remove = function(request, response) {
     request.params.order.remove(function(error, order) {
         if (error)
-            throw error;
+            return console.error(error);
 
         response.json(order);
     });
