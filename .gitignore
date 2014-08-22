@@ -9,3 +9,5 @@ test/coverage
 mean.iml
 
 *.swp
+.NERDTreeBookmarks
+.vim-sessions/
